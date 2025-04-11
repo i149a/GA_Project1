@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sudoku Game</title>
-  <!-- Link to the external CSS file for styling -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,25 +11,40 @@
     <h1>Sudoku Game</h1>
 
     <div class="controls">
-      <!-- Dropdown to select difficulty level -->
+      <!-- Difficulty selection -->
       <label for="difficulty">Select Level:</label>
       <select id="difficulty">
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
-      <!-- Button to start the game -->
+      <!-- Start button -->
       <button onclick="startGame()">Start Game</button>
-      <!-- Timer display -->
+      <!-- Timer -->
       <span id="timer">00:00</span>
     </div>
 
-    <!-- Sudoku board will be created here dynamically -->
+    <!-- Sudoku board -->
     <div id="sudoku-board" class="board"></div>
+
+    <!-- Number pad to fill cells -->
+    <div class="number-pad">
+      <button class="num-btn">1</button>
+      <button class="num-btn">2</button>
+      <button class="num-btn">3</button>
+      <button class="num-btn">4</button>
+      <button class="num-btn">5</button>
+      <button class="num-btn">6</button>
+      <button class="num-btn">7</button>
+      <button class="num-btn">8</button>
+      <button class="num-btn">9</button>
+      <button class="num-btn">🧽</button>
+    </div>
+
+    <!-- Message display -->
     <div id="message" class="message"></div>
   </div>
 
-  <!-- Link to the external JavaScript file for game logic -->
   <script src="app.js"></script>
 </body>
 </html>
