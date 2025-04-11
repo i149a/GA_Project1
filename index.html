@@ -11,24 +11,22 @@
     <h1>Sudoku Game</h1>
 
     <div class="controls">
-      <!-- Difficulty selection -->
       <label for="difficulty">Select Level:</label>
       <select id="difficulty">
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
-      <!-- Start button -->
       <button onclick="startGame()">Start Game</button>
-      <!-- Timer -->
       <span id="timer">00:00</span>
     </div>
 
-    <!-- Sudoku board -->
+    <!-- Game board -->
     <div id="sudoku-board" class="board"></div>
 
-    <!-- Number pad to fill cells -->
+    <!-- Number pad -->
     <div class="number-pad">
+      <!-- Numbers 1–9 -->
       <button class="num-btn">1</button>
       <button class="num-btn">2</button>
       <button class="num-btn">3</button>
@@ -38,11 +36,13 @@
       <button class="num-btn">7</button>
       <button class="num-btn">8</button>
       <button class="num-btn">9</button>
+      <!-- Eraser -->
       <button class="num-btn">🧽</button>
     </div>
 
-    <!-- Message display -->
+    <!-- Message display and check button -->
     <div id="message" class="message"></div>
+    <button onclick="checkSolution()">Check Solution</button>
   </div>
 
   <script src="app.js"></script>

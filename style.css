@@ -1,4 +1,4 @@
-/* === Base Body Styling === */
+/* General layout */
 body {
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
@@ -7,21 +7,26 @@ body {
   padding-top: 30px;
 }
 
-/* === Game Container === */
+/* Game wrapper */
 .game-container {
   text-align: center;
 }
 
-/* === Sudoku Board Grid === */
+/* Controls (dropdown, start, timer) */
+.controls {
+  margin-bottom: 10px;
+}
+
+/* Sudoku board */
 .board {
   display: grid;
-  grid-template-columns: repeat(9, 40px); /* 9 equal columns */
-  grid-gap: 2px; /* small space between cells */
+  grid-template-columns: repeat(9, 40px);
+  grid-gap: 2px;
   justify-content: center;
   margin-top: 20px;
 }
 
-/* === Individual Cell Style === */
+/* Sudoku cell style */
 .cell {
   width: 40px;
   height: 40px;
@@ -30,29 +35,18 @@ body {
   border: 1px solid #ccc;
 }
 
-/* === Cell Focus (when selected) === */
+/* Highlight selected cell */
 .cell:focus {
   outline: 2px solid #2196f3;
 }
 
-/* === Read-only Cells (pre-filled) === */
+/* Prefilled cells are gray */
 .cell[readonly] {
-  background-color: #e0e0e0; /* light gray */
+  background-color: #e0e0e0;
   font-weight: bold;
 }
 
-/* === Control Panel (dropdown, start button, timer) === */
-.controls {
-  margin-bottom: 10px;
-}
-
-/* === Result Message Styling === */
-.message {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* === Number Pad Container === */
+/* Number pad style */
 .number-pad {
   margin-top: 15px;
   display: flex;
@@ -61,7 +55,7 @@ body {
   gap: 5px;
 }
 
-/* === Individual Number Button === */
+/* Number buttons */
 .num-btn {
   width: 40px;
   height: 40px;
@@ -73,7 +67,29 @@ body {
   transition: background-color 0.2s;
 }
 
-/* === Hover Effect for Number Buttons === */
 .num-btn:hover {
   background-color: #ddd;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Message result */
+.message {
+  margin-top: 10px;
+  font-weight: bold;
 }

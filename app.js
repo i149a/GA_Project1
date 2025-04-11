@@ -2,7 +2,7 @@ let timerInterval;
 let seconds = 0;
 let selectedCell = null;
 
-// Puzzle presets by difficulty
+// Difficulty puzzles
 const easyPuzzle = [
   [5, 3, '', '', 7, '', '', '', ''],
   [6, '', '', 1, 9, 5, '', '', ''],
@@ -39,7 +39,7 @@ const hardPuzzle = [
   ['', '', '', '', '', '', '', '', '']
 ];
 
-// Full solution for validation
+// Solution (for easyPuzzle only)
 const solution = [
   [5,3,4,6,7,8,9,1,2],
   [6,7,2,1,9,5,3,4,8],
@@ -52,11 +52,10 @@ const solution = [
   [3,4,5,2,8,6,1,7,9]
 ];
 
-// Start game setup
+// Start game
 function startGame() {
   const difficulty = document.getElementById('difficulty').value;
   let puzzle;
-
   if (difficulty === 'easy') puzzle = easyPuzzle;
   else if (difficulty === 'medium') puzzle = mediumPuzzle;
   else puzzle = hardPuzzle;
@@ -69,7 +68,7 @@ function startGame() {
   setupNumberPad();
 }
 
-// Create board from puzzle
+// Create board
 function generateBoard(puzzle) {
   const board = document.getElementById('sudoku-board');
   board.innerHTML = '';
@@ -93,13 +92,12 @@ function generateBoard(puzzle) {
         selectedCell = input;
       });
 
-      input.addEventListener('input', checkBoard);
       board.appendChild(input);
     }
   }
 }
 
-// Handle clickable numbers
+// Setup number pad events
 function setupNumberPad() {
   const buttons = document.querySelectorAll('.num-btn');
   buttons.forEach(button => {
@@ -107,13 +105,23 @@ function setupNumberPad() {
       if (!selectedCell || selectedCell.readOnly) return;
       const value = button.textContent;
       selectedCell.value = value === '🧽' ? '' : value;
-      checkBoard();
     });
   });
 }
 
-// Check if puzzle is solved
-function checkBoard() {
+// Timer function
+function startTimer() {
+  const timerDisplay = document.getElementById('timer');
+  timerInterval = setInterval(() => {
+    seconds++;
+    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    timerDisplay.textContent = `${mins}:${secs}`;
+  }, 1000);
+}
+
+// Check the solution
+function checkSolution() {
   const cells = document.querySelectorAll('.cell');
   let correct = true;
 
@@ -125,28 +133,18 @@ function checkBoard() {
     if (!cell.readOnly) {
       if (val !== solution[row][col]) {
         correct = false;
+        cell.style.backgroundColor = "#ffcccc";
+      } else {
+        cell.style.backgroundColor = "#ccffcc";
       }
     }
   });
 
-  if (correct && allCellsFilled()) {
+  const message = document.getElementById('message');
+  if (correct) {
     clearInterval(timerInterval);
-    document.getElementById('message').textContent = '🎉 Congratulations! You solved it!';
+    message.textContent = '🎉 Congratulations! You solved it!';
+  } else {
+    message.textContent = '❌ Some answers are incorrect.';
   }
-}
-
-// Check if board is fully filled
-function allCellsFilled() {
-  return [...document.querySelectorAll('.cell')].every(cell => cell.value !== '');
-}
-
-// Timer logic
-function startTimer() {
-  const timerDisplay = document.getElementById('timer');
-  timerInterval = setInterval(() => {
-    seconds++;
-    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const secs = String(seconds % 60).padStart(2, '0');
-    timerDisplay.textContent = `${mins}:${secs}`;
-  }, 1000);
 }
