@@ -1,0 +1,54 @@
+body {
+    /* Basic page styling */
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+  }
+  
+  .game-container {
+    /* Center content */
+    text-align: center;
+  }
+  
+  .board {
+    /* 9x9 grid for Sudoku */
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-gap: 2px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .cell {
+    /* Styling for each input cell */
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+  }
+  
+  .cell:focus {
+    /* Highlight active cell */
+    outline: 2px solid #2196f3;
+  }
+  
+  .cell[readonly] {
+    /* Style for pre-filled cells */
+    background-color: #e0e0e0;
+    font-weight: bold;
+  }
+  
+  .controls {
+    /* Space below control section */
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    /* Message styling (e.g., win message) */
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
