@@ -1,8 +1,8 @@
-// Initialize timer variables
 let timerInterval;
 let seconds = 0;
+let selectedCell = null;
 
-// Sudoku puzzles for each difficulty
+// Puzzle presets by difficulty
 const easyPuzzle = [
   [5, 3, '', '', 7, '', '', '', ''],
   [6, '', '', 1, 9, 5, '', '', ''],
@@ -39,7 +39,7 @@ const hardPuzzle = [
   ['', '', '', '', '', '', '', '', '']
 ];
 
-// Predefined correct solution (same for all puzzles in this simple example)
+// Full solution for validation
 const solution = [
   [5,3,4,6,7,8,9,1,2],
   [6,7,2,1,9,5,3,4,8],
@@ -52,30 +52,28 @@ const solution = [
   [3,4,5,2,8,6,1,7,9]
 ];
 
-// Start the game
+// Start game setup
 function startGame() {
   const difficulty = document.getElementById('difficulty').value;
   let puzzle;
 
-  // Select puzzle based on difficulty
   if (difficulty === 'easy') puzzle = easyPuzzle;
   else if (difficulty === 'medium') puzzle = mediumPuzzle;
   else puzzle = hardPuzzle;
 
-  // Reset timer and start again
   seconds = 0;
   clearInterval(timerInterval);
   startTimer();
-
-  // Generate the board UI
   generateBoard(puzzle);
   document.getElementById('message').textContent = '';
+  setupNumberPad();
 }
 
-// Generate the 9x9 board
+// Create board from puzzle
 function generateBoard(puzzle) {
   const board = document.getElementById('sudoku-board');
   board.innerHTML = '';
+  selectedCell = null;
 
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
@@ -91,14 +89,30 @@ function generateBoard(puzzle) {
         input.readOnly = true;
       }
 
-      // Listen for input to validate board
+      input.addEventListener('focus', () => {
+        selectedCell = input;
+      });
+
       input.addEventListener('input', checkBoard);
       board.appendChild(input);
     }
   }
 }
 
-// Check board against the solution
+// Handle clickable numbers
+function setupNumberPad() {
+  const buttons = document.querySelectorAll('.num-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (!selectedCell || selectedCell.readOnly) return;
+      const value = button.textContent;
+      selectedCell.value = value === '🧽' ? '' : value;
+      checkBoard();
+    });
+  });
+}
+
+// Check if puzzle is solved
 function checkBoard() {
   const cells = document.querySelectorAll('.cell');
   let correct = true;
@@ -108,7 +122,6 @@ function checkBoard() {
     const col = parseInt(cell.dataset.col);
     const val = parseInt(cell.value);
 
-    // Only check user-editable cells
     if (!cell.readOnly) {
       if (val !== solution[row][col]) {
         correct = false;
@@ -116,19 +129,18 @@ function checkBoard() {
     }
   });
 
-  // If correct and complete, show message
   if (correct && allCellsFilled()) {
     clearInterval(timerInterval);
     document.getElementById('message').textContent = '🎉 Congratulations! You solved it!';
   }
 }
 
-// Check if all cells are filled in
+// Check if board is fully filled
 function allCellsFilled() {
   return [...document.querySelectorAll('.cell')].every(cell => cell.value !== '');
 }
 
-// Start and update timer every second
+// Timer logic
 function startTimer() {
   const timerDisplay = document.getElementById('timer');
   timerInterval = setInterval(() => {
