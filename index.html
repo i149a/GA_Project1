@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sudoku Game</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="game-container">
@@ -17,16 +17,13 @@
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
-      <button onclick="startGame()">Start Game</button>
+      <button id="start-btn" class="action-btn">Start Game</button>
       <span id="timer">00:00</span>
     </div>
 
-    <!-- Game board -->
     <div id="sudoku-board" class="board"></div>
 
-    <!-- Number pad -->
     <div class="number-pad">
-      <!-- Numbers 1–9 -->
       <button class="num-btn">1</button>
       <button class="num-btn">2</button>
       <button class="num-btn">3</button>
@@ -36,13 +33,19 @@
       <button class="num-btn">7</button>
       <button class="num-btn">8</button>
       <button class="num-btn">9</button>
-      <!-- Eraser -->
       <button class="num-btn">🧽</button>
     </div>
 
-    <!-- Message display and check button -->
+    <div class="wrong-guesses">
+      Wrong guesses: <span id="wrong-guesses-count">0</span>/3
+    </div>
+
     <div id="message" class="message"></div>
-    <button onclick="checkSolution()">Check Solution</button>
+
+    <div class="action-buttons">
+      <button id="restart-btn" class="action-btn">Restart</button>
+      <button id="pause-btn" class="action-btn">Pause</button>
+    </div>
   </div>
 
   <script src="app.js"></script>
