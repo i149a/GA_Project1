@@ -1,95 +1,260 @@
-/* General layout */
+/* General Styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-image: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* Game wrapper */
+/* Game Container */
 .game-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   text-align: center;
+  max-width: 500px;
+  width: 90%;
 }
 
-/* Controls (dropdown, start, timer) */
+/* Title */
+h1 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Controls */
 .controls {
-  margin-bottom: 10px;
-}
-
-/* Sudoku board */
-.board {
-  display: grid;
-  grid-template-columns: repeat(9, 40px);
-  grid-gap: 2px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-/* Sudoku cell style */
-.cell {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  font-size: 18px;
-  border: 1px solid #ccc;
-}
-
-/* Highlight selected cell */
-.cell:focus {
-  outline: 2px solid #2196f3;
-}
-
-/* Prefilled cells are gray */
-.cell[readonly] {
-  background-color: #e0e0e0;
-  font-weight: bold;
-}
-
-/* Number pad style */
-.number-pad {
-  margin-top: 15px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: 5px;
 }
 
-/* Number buttons */
-.num-btn {
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
+.controls select {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.controls button {
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  font-size: 14px;
   transition: background-color 0.2s;
 }
 
-.num-btn:hover {
-  background-color: #ddd;
+.controls button:hover {
+  background-color: #2980b9;
 }
 
-/* Buttons */
-button {
+/* Timer */
+#timer {
+  font-family: monospace;
+  font-size: 18px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+/* Sudoku Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: 0;
+  border: 3px solid #2c3e50;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1/1;
+  background-color: #2c3e50;
+}
+
+/* Sudoku Cells */
+.cell {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #2c3e50;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.cell:focus {
+  outline: none;
+  background-color: #e6f7ff;
+}
+
+/* Prefilled Cells */
+.cell.prefilled {
+  background-color: #f0f0f0;
+  color: #2c3e50;
+}
+
+/* 3x3 Box Borders */
+.cell:nth-child(3n) {
+  border-right: 2px solid #2c3e50 !important;
+}
+
+.cell:nth-child(9n) {
+  border-right: 1px solid #ddd !important;
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 2px solid #2c3e50 !important;
+}
+
+/* Number Pad */
+.number-pad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.num-btn {
+  aspect-ratio: 1/1;
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #2c3e50;
+  transition: all 0.2s;
+}
+
+.num-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 
-button:hover {
-  background-color: #45a049;
+#restart-btn {
+  background-color: #e74c3c;
 }
 
-/* Message result */
+#restart-btn:hover {
+  background-color: #c0392b;
+}
+
+#pause-btn {
+  background-color: #3498db;
+}
+
+#pause-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Messages */
 .message {
-  margin-top: 10px;
+  margin: 15px 0;
+  font-size: 18px;
   font-weight: bold;
+  min-height: 27px;
+}
+
+.win-message {
+  color: #27ae60;
+}
+
+.lose-message {
+  color: #e74c3c;
+}
+
+/* Wrong Guesses */
+.wrong-guesses {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Cell States */
+.cell.correct {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.cell.incorrect {
+  background-color: #f8d7da;
+  color: #721c24;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 15px;
+  }
+  
+  .cell {
+    font-size: 18px;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .action-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
